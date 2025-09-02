@@ -1,12 +1,12 @@
 package com.ipaas.desafiotecnicoipass.service;
 
-import com.ipaas.desafiotecnicoipaas.dto.TarefaRequest;
-import com.ipaas.desafiotecnicoipaas.dto.TarefaStatusRequest;
-import com.ipaas.desafiotecnicoipaas.exception.RecursoNaoEncontradoException;
-import com.ipaas.desafiotecnicoipaas.model.StatusTarefa;
-import com.ipaas.desafiotecnicoipaas.model.Tarefa;
-import com.ipaas.desafiotecnicoipaas.model.Usuario;
-import com.ipaas.desafiotecnicoipaas.repository.TarefaRepository;
+import com.ipaas.desafiotecnicoipass.dto.TarefaRequest;
+import com.ipaas.desafiotecnicoipass.dto.TarefaStatusRequest;
+import com.ipaas.desafiotecnicoipass.exception.RecursoNaoEncontradoException;
+import com.ipaas.desafiotecnicoipass.model.StatusTarefa;
+import com.ipaas.desafiotecnicoipass.model.Tarefa;
+import com.ipaas.desafiotecnicoipass.model.Usuario;
+import com.ipaas.desafiotecnicoipass.repository.TarefaRepository;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;

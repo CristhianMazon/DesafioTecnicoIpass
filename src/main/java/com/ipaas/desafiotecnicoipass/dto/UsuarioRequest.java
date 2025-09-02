@@ -12,6 +12,19 @@ public class UsuarioRequest {
     @Email(message = "O formato do e-mail é inválido")
     private String email;
 
-    // Construtor, Getters e Setters
-    // ...
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

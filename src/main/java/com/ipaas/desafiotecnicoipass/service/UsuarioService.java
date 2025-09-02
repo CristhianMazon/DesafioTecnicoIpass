@@ -1,10 +1,10 @@
 package com.ipaas.desafiotecnicoipass.service;
 
-import com.ipaas.desafiotecnicoipaas.dto.UsuarioRequest;
-import com.ipaas.desafiotecnicoipaas.exception.EmailJaExisteException;
-import com.ipaas.desafiotecnicoipaas.exception.RecursoNaoEncontradoException;
-import com.ipaas.desafiotecnicoipaas.model.Usuario;
-import com.ipaas.desafiotecnicoipaas.repository.UsuarioRepository;
+import com.ipaas.desafiotecnicoipass.dto.UsuarioRequest;
+import com.ipaas.desafiotecnicoipass.exception.EmailJaExisteException;
+import com.ipaas.desafiotecnicoipass.exception.RecursoNaoEncontradoException;
+import com.ipaas.desafiotecnicoipass.model.Usuario;
+import com.ipaas.desafiotecnicoipass.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import java.util.UUID;
 

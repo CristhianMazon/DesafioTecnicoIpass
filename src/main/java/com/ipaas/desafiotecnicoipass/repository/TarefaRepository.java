@@ -1,7 +1,7 @@
 package com.ipaas.desafiotecnicoipass.repository;
 
-import com.ipaas.desafiotecnicoipaas.model.StatusTarefa;
-import com.ipaas.desafiotecnicoipaas.model.Tarefa;
+import com.ipaas.desafiotecnicoipass.model.StatusTarefa;
+import com.ipaas.desafiotecnicoipass.model.Tarefa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;

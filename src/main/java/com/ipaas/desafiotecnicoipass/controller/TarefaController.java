@@ -1,10 +1,10 @@
 package com.ipaas.desafiotecnicoipass.controller;
 
-import com.ipaas.desafiotecnicoipaas.dto.TarefaRequest;
-import com.ipaas.desafiotecnicoipaas.dto.TarefaStatusRequest;
-import com.ipaas.desafiotecnicoipaas.model.StatusTarefa;
-import com.ipaas.desafiotecnicoipaas.model.Tarefa;
-import com.ipaas.desafiotecnicoipaas.service.TarefaService;
+import com.ipaas.desafiotecnicoipass.dto.TarefaRequest;
+import com.ipaas.desafiotecnicoipass.dto.TarefaStatusRequest;
+import com.ipaas.desafiotecnicoipass.model.StatusTarefa;
+import com.ipaas.desafiotecnicoipass.model.Tarefa;
+import com.ipaas.desafiotecnicoipass.service.TarefaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,6 @@ public class TarefaController {
 
     private final TarefaService tarefaService;
 
-    // Injeção de dependência do serviço
     public TarefaController(TarefaService tarefaService) {
         this.tarefaService = tarefaService;
     }

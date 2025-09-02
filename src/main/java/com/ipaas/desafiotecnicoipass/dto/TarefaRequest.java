@@ -14,6 +14,27 @@ public class TarefaRequest {
     @NotNull(message = "O ID do usuário é obrigatório")
     private UUID usuarioId;
 
-    // Construtor, Getters e Setters
-    // ...
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public UUID getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(UUID usuarioId) {
+        this.usuarioId = usuarioId;
+    }
 }

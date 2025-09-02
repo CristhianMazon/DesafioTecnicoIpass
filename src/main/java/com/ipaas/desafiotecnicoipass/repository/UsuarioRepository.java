@@ -1,6 +1,6 @@
 package com.ipaas.desafiotecnicoipass.repository;
 
-import com.ipaas.desafiotecnicoipaas.model.Usuario;
+import com.ipaas.desafiotecnicoipass.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 import java.util.UUID;
