@@ -16,7 +16,7 @@ import java.util.UUID;
 public class SubtarefaService {
 
     private final SubtarefaRepository subtarefaRepository;
-    private final TarefaService tarefaService; // Para buscar a tarefa-mãe
+    private final TarefaService tarefaService;
 
     public SubtarefaService(SubtarefaRepository subtarefaRepository, TarefaService tarefaService) {
         this.subtarefaRepository = subtarefaRepository;
@@ -44,7 +44,6 @@ public class SubtarefaService {
         Subtarefa subtarefa = subtarefaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Subtarefa não encontrada com ID: " + id));
         
-        // Regra de negócio: dataConclusao só é preenchida se o status for CONCLUIDA
         if (statusRequest.getStatus() == StatusTarefa.CONCLUIDA) {
             subtarefa.setDataConclusao(LocalDateTime.now());
         } else {
