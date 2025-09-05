@@ -57,4 +57,9 @@ public class TarefaService {
 
         return tarefaRepository.save(tarefa);
     }
+
+    public Tarefa buscarPorId(UUID tarefaId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buscarPorId'");
+    }
 }

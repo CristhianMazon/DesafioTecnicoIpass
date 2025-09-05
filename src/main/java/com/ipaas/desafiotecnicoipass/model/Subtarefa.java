@@ -2,11 +2,10 @@ package com.ipaas.desafiotecnicoipass.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Tarefa {
+public class Subtarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -21,13 +20,10 @@ public class Tarefa {
     private LocalDateTime dataConclusao;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @JoinColumn(name = "tarefa_id")
+    private Tarefa tarefa;
 
-    @OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Subtarefa> subtarefas;
-
-    public Tarefa() {}
+    public Subtarefa() {}
 
     public UUID getId() {
         return id;
@@ -77,19 +73,11 @@ public class Tarefa {
         this.dataConclusao = dataConclusao;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Tarefa getTarefa() {
+        return tarefa;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<Subtarefa> getSubtarefas() {
-        return subtarefas;
-    }
-
-    public void setSubtarefas(List<Subtarefa> subtarefas) {
-        this.subtarefas = subtarefas;
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
     }
 }
