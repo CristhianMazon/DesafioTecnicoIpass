@@ -7,6 +7,7 @@ import com.ipaas.desafiotecnicoipass.model.StatusTarefa;
 import com.ipaas.desafiotecnicoipass.model.Tarefa;
 import com.ipaas.desafiotecnicoipass.model.Usuario;
 import com.ipaas.desafiotecnicoipass.repository.TarefaRepository;
+import com.ipaas.desafiotecnicoipass.repository.SubtarefaRepository;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,10 +18,12 @@ public class TarefaService {
 
     private final TarefaRepository tarefaRepository;
     private final UsuarioService usuarioService;
+    private final SubtarefaRepository subtarefaRepository;
 
-    public TarefaService(TarefaRepository tarefaRepository, UsuarioService usuarioService) {
+    public TarefaService(TarefaRepository tarefaRepository, UsuarioService usuarioService, SubtarefaRepository subtarefaRepository) {
         this.tarefaRepository = tarefaRepository;
         this.usuarioService = usuarioService;
+        this.subtarefaRepository = subtarefaRepository;
     }
 
     public Tarefa criarTarefa(TarefaRequest tarefaRequest) {
@@ -48,6 +51,14 @@ public class TarefaService {
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Tarefa não encontrada com ID: " + id));
 
         if (statusRequest.getStatus() == StatusTarefa.CONCLUIDA) {
+            // Regra de negócio: uma tarefa só pode ser concluída se todas as subtarefas estiverem com status CONCLUIDA
+            long subtarefasNaoConcluidas = subtarefaRepository.findByTarefaId(id).stream()
+                .filter(sub -> sub.getStatus() != StatusTarefa.CONCLUIDA)
+                .count();
+
+            if (subtarefasNaoConcluidas > 0) {
+                throw new IllegalStateException("Não é possível concluir a tarefa, pois ainda existem " + subtarefasNaoConcluidas + " subtarefas não concluídas.");
+            }
             tarefa.setDataConclusao(LocalDateTime.now());
         } else {
             tarefa.setDataConclusao(null);
