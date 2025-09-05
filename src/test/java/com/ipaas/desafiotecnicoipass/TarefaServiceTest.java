@@ -1,4 +1,4 @@
-package com.ipaas.desafiotecnicoipass.service;
+package com.ipaas.desafiotecnicoipass;
 
 import com.ipaas.desafiotecnicoipass.dto.TarefaRequest;
 import com.ipaas.desafiotecnicoipass.dto.TarefaStatusRequest;
@@ -9,6 +9,8 @@ import com.ipaas.desafiotecnicoipass.model.Tarefa;
 import com.ipaas.desafiotecnicoipass.model.Usuario;
 import com.ipaas.desafiotecnicoipass.repository.SubtarefaRepository;
 import com.ipaas.desafiotecnicoipass.repository.TarefaRepository;
+import com.ipaas.desafiotecnicoipass.service.TarefaService;
+import com.ipaas.desafiotecnicoipass.service.UsuarioService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -91,19 +93,43 @@ class TarefaServiceTest {
     }
 
     @Test
-    void atualizarStatusTarefaParaConcluidaSemSubtarefasLancaExcecao() {
+    void atualizarStatusTarefaParaConcluidaSemSubtarefasComSucesso() {
         TarefaStatusRequest statusRequest = new TarefaStatusRequest();
         statusRequest.setStatus(StatusTarefa.CONCLUIDA);
 
         when(tarefaRepository.findById(tarefa.getId())).thenReturn(Optional.of(tarefa));
         when(subtarefaRepository.findByTarefaId(tarefa.getId())).thenReturn(Collections.emptyList());
+        when(tarefaRepository.save(any(Tarefa.class))).thenReturn(tarefa);
 
-        assertThrows(IllegalStateException.class, () -> {
-            tarefaService.atualizarStatusTarefa(tarefa.getId(), statusRequest);
-        });
-        verify(tarefaRepository, never()).save(any(Tarefa.class));
+        Tarefa tarefaAtualizada = assertDoesNotThrow(() ->
+            tarefaService.atualizarStatusTarefa(tarefa.getId(), statusRequest)
+        );
+
+        assertEquals(StatusTarefa.CONCLUIDA, tarefaAtualizada.getStatus());
+        assertNotNull(tarefaAtualizada.getDataConclusao());
+        verify(tarefaRepository, times(1)).save(any(Tarefa.class));
     }
 
+    @Test
+    void atualizarStatusTarefaParaConcluidaComTodasSubtarefasConcluidas() {
+        TarefaStatusRequest statusRequest = new TarefaStatusRequest();
+        statusRequest.setStatus(StatusTarefa.CONCLUIDA);
+
+        Subtarefa subtarefaConcluida = new Subtarefa();
+        subtarefaConcluida.setStatus(StatusTarefa.CONCLUIDA);
+
+        when(tarefaRepository.findById(tarefa.getId())).thenReturn(Optional.of(tarefa));
+        when(subtarefaRepository.findByTarefaId(tarefa.getId())).thenReturn(List.of(subtarefaConcluida));
+        when(tarefaRepository.save(any(Tarefa.class))).thenReturn(tarefa);
+
+        Tarefa tarefaAtualizada = assertDoesNotThrow(() ->
+            tarefaService.atualizarStatusTarefa(tarefa.getId(), statusRequest)
+        );
+
+        assertEquals(StatusTarefa.CONCLUIDA, tarefaAtualizada.getStatus());
+        assertNotNull(tarefaAtualizada.getDataConclusao());
+        verify(tarefaRepository, times(1)).save(any(Tarefa.class));
+    }
 
     @Test
     void buscarTarefaInexistenteLancaExcecao() {
