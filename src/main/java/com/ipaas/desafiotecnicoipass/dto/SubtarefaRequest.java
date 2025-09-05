@@ -1,7 +1,6 @@
 package com.ipaas.desafiotecnicoipass.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import java.util.UUID;
 
 public class SubtarefaRequest {
 
