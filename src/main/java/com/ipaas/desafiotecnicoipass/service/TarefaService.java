@@ -51,7 +51,6 @@ public class TarefaService {
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Tarefa não encontrada com ID: " + id));
 
         if (statusRequest.getStatus() == StatusTarefa.CONCLUIDA) {
-            // Regra de negócio: uma tarefa só pode ser concluída se todas as subtarefas estiverem com status CONCLUIDA
             long subtarefasNaoConcluidas = subtarefaRepository.findByTarefaId(id).stream()
                 .filter(sub -> sub.getStatus() != StatusTarefa.CONCLUIDA)
                 .count();
@@ -70,7 +69,7 @@ public class TarefaService {
     }
 
     public Tarefa buscarPorId(UUID tarefaId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPorId'");
+        return tarefaRepository.findById(tarefaId)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Tarefa não encontrada com ID: " + tarefaId));
     }
 }

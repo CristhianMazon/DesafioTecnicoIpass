@@ -1,12 +1,10 @@
-package com.ipaas.desafiotecnicoipass;
+package com.ipaas.desafiotecnicoipass.service;
 
 import com.ipaas.desafiotecnicoipass.dto.UsuarioRequest;
 import com.ipaas.desafiotecnicoipass.exception.EmailJaExisteException;
 import com.ipaas.desafiotecnicoipass.exception.RecursoNaoEncontradoException;
 import com.ipaas.desafiotecnicoipass.model.Usuario;
 import com.ipaas.desafiotecnicoipass.repository.UsuarioRepository;
-import com.ipaas.desafiotecnicoipass.service.UsuarioService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
